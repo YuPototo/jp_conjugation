@@ -1,29 +1,13 @@
-# conjugation
+# 说明
 
 ## Project setup
+
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## 项目说明
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+一个 toy project。
 
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+用卡片的方式复习日语变形。
