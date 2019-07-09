@@ -9,7 +9,7 @@
 import TableContent from '@/components/TableContent.vue'
 
 export default {
-  name: 'home',
+  name: 'Home',
   components: {
     TableContent
   }

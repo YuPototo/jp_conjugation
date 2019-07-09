@@ -23,9 +23,10 @@
 
 <script>
 import ExerciseCard from '@/components/ExerciseCard.vue'
+import { mapState } from 'vuex'
 
 export default {
-  name: 'home',
+  name: 'Exercise',
   data () {
     return {
       partId: parseInt(this.$route.params.partId, 10),
@@ -38,7 +39,7 @@ export default {
   },
   methods: {
     nextCard () {
-      if (this.cardId + 2 <= this.partLength) {
+      if (this.cardId + 2 <= this.cardCount) {
         this.cardId++;
       } else {
         this.msg = '没有题目啦'
@@ -49,9 +50,16 @@ export default {
     }
   },
   computed: {
-    title () {
-      return this.$store.getters.getTitle(this.partId);
-    },
+    ...mapState({
+      title: function (state) {
+        let part = state.cardGroups.filter(part => part.id === this.partId)[0];
+        return part.title;
+      },
+      cardCount: function (state) {
+        let part = state.cardGroups.filter(part => part.id === this.partId)[0];
+        return part.cards.length;
+      }
+    }),
     partLength () {
       return this.$store.getters.getPartLength(this.partId);
     }

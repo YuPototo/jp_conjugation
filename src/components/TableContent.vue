@@ -1,7 +1,7 @@
 <template>
-  <ul class='list-group list-group-flush'>
+  <ul class="list-group list-group-flush">
     <router-link
-      v-for="(part, index) in contents"
+      v-for="(part, index) in tableOfContents"
       :key="index"
       tag="li"
       class="list-group-item"
@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'TableContent',
   computed: {
-    ...mapGetters({
-      contents: 'getContents'
+    ...mapState({
+      tableOfContents: state => state.cardGroups
     })
   }
 
