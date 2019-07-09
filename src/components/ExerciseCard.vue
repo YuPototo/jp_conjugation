@@ -14,33 +14,16 @@
         {{ card.back }}
       </div>
     </div>
-    <button
-      v-show="isFront"
-      @click='isFront=!isFront'
-      class="btn btn-primary"
-    >查看答案</button>
   </div>
 
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      isFront: true
-    }
-  },
   props: [
-    'partId',
-    'cardId'
-  ],
-  computed: {
-    card () {
-      // eslint-disable-next-line
-      this.isFront = true;
-      return this.$store.getters.getCard(this.partId, this.cardId);
-    },
-  }
+    'card',
+    'isFront'
+  ]
 }
 </script>
 

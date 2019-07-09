@@ -2,14 +2,18 @@
   <div>
     <h1>练习 - {{ title }}</h1>
     <ExerciseCard
-      :partId='partId'
-      :cardId='cardId'
+      :card='cards[cardId]'
+      :isFront='this.showFront'
       class="exercise-card"
     />
     <button
       @click='goHome'
       class="btn btn-outline-secondary mr-2"
     >回到首页</button>
+    <button
+      @click='turnCard'
+      class="btn btn-primary mr-2"
+    >查看答案</button>
     <button
       @click='nextCard'
       class="btn btn-outline-primary"
@@ -31,6 +35,7 @@ export default {
     return {
       partId: parseInt(this.$route.params.partId, 10),
       cardId: 0,
+      showFront: true,
       msg: ""
     }
   },
@@ -38,9 +43,13 @@ export default {
     ExerciseCard,
   },
   methods: {
+    turnCard () {
+      this.showFront = false;
+    },
     nextCard () {
       if (this.cardId + 2 <= this.cardCount) {
         this.cardId++;
+        this.showFront = true;
       } else {
         this.msg = '没有题目啦'
       }
@@ -51,18 +60,19 @@ export default {
   },
   computed: {
     ...mapState({
-      title: function (state) {
+      title (state) {
         let part = state.cardGroups.filter(part => part.id === this.partId)[0];
         return part.title;
       },
-      cardCount: function (state) {
+      cardCount (state) {
         let part = state.cardGroups.filter(part => part.id === this.partId)[0];
         return part.cards.length;
+      },
+      cards (state) {
+        let part = state.cardGroups.filter(part => part.id === this.partId)[0];
+        return part.cards;
       }
-    }),
-    partLength () {
-      return this.$store.getters.getPartLength(this.partId);
-    }
+    })
   }
 }
 </script>
